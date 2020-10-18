@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option go_package = "github.com/digutier/tareasd/camion";
+
+package camion;
+
+message Message {
+    string body = 1;
+}
+
+message Paquete {
+    string id = 1;
+    string seguimiento = 2;
+    string tipo = 3;
+    string estado = 4;
+    string origen = 5;
+    string destino = 6;
+    int64 intentos = 7;
+    int64 valor = 8;
+
+}
+
+service CamionService {
+    rpc RecibirPaquete(Message) returns (Paquete) {}
+    rpc EntregaPaquete(Paquete) returns (Message) {}
+    rpc EnviarEstado(Paquete) returns (Message) {}
+}
